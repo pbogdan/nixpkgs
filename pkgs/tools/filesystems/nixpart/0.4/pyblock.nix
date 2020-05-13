@@ -11,6 +11,10 @@ stdenv.mkDerivation rec {
     sha256 = "f6cef88969300a6564498557eeea1d8da58acceae238077852ff261a2cb1d815";
   };
 
+  patches = [
+    ./pyblock-sysmacros.h.patch
+  ];
+
   postPatch = ''
     sed -i -e 's|/usr/include/python|${python}/include/python|' \
            -e 's/-Werror *//' -e 's|/usr/|'"$out"'/|' Makefile

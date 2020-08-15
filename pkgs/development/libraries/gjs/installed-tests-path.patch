@@ -1,17 +1,3 @@
-diff --git a/installed-tests/meson.build b/installed-tests/meson.build
-index 7e842025..1e5029e0 100644
---- a/installed-tests/meson.build
-+++ b/installed-tests/meson.build
-@@ -1,7 +1,7 @@
- ### Installed tests ############################################################
- 
--installed_tests_execdir = get_option('prefix') / pkglibexecdir / 'installed-tests'
--installed_tests_metadir = abs_datadir / 'installed-tests' / meson.project_name()
-+installed_tests_execdir = get_option('installed_test_prefix') / 'libexec' / meson.project_name() / 'installed-tests'
-+installed_tests_metadir = get_option('installed_test_prefix') / 'share' / 'installed-tests' / meson.project_name()
- 
- # Simple shell script tests #
- 
 diff --git a/meson.build b/meson.build
 index 084d5396..e5d73fcd 100644
 --- a/meson.build

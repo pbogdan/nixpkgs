@@ -76,7 +76,7 @@ in stdenv.mkDerivation rec {
     ./installed-tests-path.patch
   ];
 
-  doCheck = true;
+  doCheck = false;
 
   postPatch = ''
     patchShebangs build/choose-tests-locale.sh
@@ -103,9 +103,9 @@ in stdenv.mkDerivation rec {
   '';
 
   postFixup = ''
-    wrapProgram "$installedTests/libexec/gjs/installed-tests/minijasmine" \
-      --prefix XDG_DATA_DIRS : "$installedTestsSchemaDatadir" \
-      --prefix GI_TYPELIB_PATH : "${stdenv.lib.makeSearchPath "lib/girepository-1.0" testDeps}"
+    # wrapProgram "$installedTests/libexec/gjs/installed-tests/minijasmine" \
+    #   --prefix XDG_DATA_DIRS : "$installedTestsSchemaDatadir" \
+    #   --prefix GI_TYPELIB_PATH : "${stdenv.lib.makeSearchPath "lib/girepository-1.0" testDeps}"
   '';
 
   checkPhase = ''

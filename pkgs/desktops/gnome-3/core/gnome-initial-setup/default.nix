@@ -30,17 +30,17 @@
 , systemd
 , libnma
 , tzdata
-, yelp
+, gnome-tour
 , libgnomekbd
 }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-initial-setup";
-  version = "3.36.4";
+  version = "3.38.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${stdenv.lib.versions.majorMinor version}/${pname}-${version}.tar.xz";
-    sha256 = "17szzz2a5wpi7kwjnhimiwf8vg0bfliyk3k0adgv1pw2mcfpxp5s";
+    sha256 = "0n97z3325i9mc2ip0w4p5mv0yqi7mmlq9nrjhr09ys7vbvppm19s";
   };
 
   nativeBuildInputs = [
@@ -80,7 +80,7 @@ stdenv.mkDerivation rec {
     (substituteAll {
       src = ./fix-paths.patch;
       inherit tzdata libgnomekbd;
-      yelp = "${yelp}/bin/yelp"; # gnome-welcome-tour
+      gnome_tour = "${gnome-tour}/bin/gnome-tour"; # gnome-welcome-tour
     })
   ];
 

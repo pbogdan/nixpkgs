@@ -172,7 +172,9 @@ lib.makeScope pkgs.newScope (self: with self; {
 
   gnome-characters = callPackage ./apps/gnome-characters { };
 
-  gnome-clocks = callPackage ./apps/gnome-clocks { };
+  gnome-clocks = callPackage ./apps/gnome-clocks {
+    libhandy = pkgs.libhandy-1;
+  };
 
   gnome-documents = callPackage ./apps/gnome-documents { };
 

@@ -1,10 +1,11 @@
 { stdenv
-, autoreconfHook
 , dconf
 , fetchurl
 , itstool
 , libtool
 , libxml2
+, meson
+, ninja
 , pkg-config
 , substituteAll
 
@@ -21,6 +22,7 @@
 , pam
 , plymouth
 , systemd
+, xlibs
 , xorg
 , xwayland
 }:
@@ -37,11 +39,11 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "gdm";
-  version = "3.34.1";
+  version = "3.38.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gdm/${stdenv.lib.versions.majorMinor version}/${pname}-${version}.tar.xz";
-    sha256 = "1lyqvcwxhwxklbxn4xjswjzr6fhjix6h28mi9ypn34wdm9bzcpg8";
+    sha256 = "1fimhklb204rflz8k345756jikgbw8113hms3zlcwk6975f43m26";
   };
 
   patches = [
@@ -69,11 +71,12 @@ stdenv.mkDerivation rec {
   ];
 
   nativeBuildInputs = [
-    autoreconfHook
     dconf
     itstool
     libtool
     libxml2
+    meson
+    ninja
     pkg-config
   ];
 
@@ -88,36 +91,53 @@ stdenv.mkDerivation rec {
     pam
     plymouth
     systemd
+    xlibs.libXdmcp
   ];
-
-  # Only needed to make it build
-  preConfigure = ''
-    substituteInPlace ./configure --replace "/usr/bin/X" "${xorg.xorgserver.out}/bin/X"
-  '';
 
   initialVT = "7";
 
-  configureFlags = [
-    "--sysconfdir=/etc"
-    "--localstatedir=/var"
-    "--with-plymouth=yes"
-    "--enable-gdm-xsession"
-    "--with-initial-vt=${initialVT}"
-    "--with-systemdsystemunitdir=$(out)/etc/systemd/system"
-    "--with-udevdir=$(out)/lib/udev"
+  preConfigure = ''
+    substituteInPlace build-aux/find-x-server.sh \
+      --replace "/usr/bin/X" "${xorg.xorgserver.out}/bin/X"
+    # fix up a typo in data/meson.build
+    substituteInPlace data/meson.build \
+      --replace "XSession.in" "Xsession.in"
+  '';
+
+  mesonFlags = [
+    "-Dsysconfdir=${placeholder "out"}/etc"
+    "-Dlocalstatedir=/var"
+    "-Dplymouth=enabled"
+    "-Dgdm-xsession=true"
+    "-Dinitial-vt=${initialVT}"
+    "-Dsystemdsystemunitdir=${placeholder "out"}/etc/systemd/system"
+    "-Dudev-dir=${placeholder "out"}/lib/udev"
+    "-Dselinux=disabled"
+    "-Dlibaudit=disabled"
   ];
 
   enableParallelBuilding = true;
 
-  preInstall = ''
+  # @HACK: we want GDM to read its configuration from /etc but at the same time prevent it from
+  # writing there during the install phase. With autotools we could set sysconfdir to /etc and then
+  # override it just during the install phase. I couldn't figure out how to do it with meson/ninja
+  # so did it other way around: sysconfdir point to $out/etc and we manually adjust the constants in
+  # the generated config.h.
+  preBuild = ''
+    substituteInPlace config.h \
+      --replace "${placeholder "out"}/etc" "/etc"
+  '';
+
+  # @TODO: why is this suddenly necessary?
+  postInstall = ''
+    glib-compile-schemas $out/share/glib-2.0/schemas
+  '';
+
+  postFixup = ''
     schema_dir=${glib.makeSchemaPath "$out" "${pname}-${version}"}
     install -D ${override} $schema_dir/org.gnome.login-screen.gschema.override
   '';
 
-  installFlags = [
-    "sysconfdir=$(out)/etc"
-    "dbusconfdir=$(out)/etc/dbus-1/system.d"
-  ];
   passthru = {
     updateScript = gnome3.updateScript {
       packageName = "gdm";

@@ -8,6 +8,7 @@
 , gtk3
 , glib
 , gdk-pixbuf
+, librsvg
 , desktop-file-utils
 , appstream-glib
 , wrapGAppsHook
@@ -18,7 +19,7 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "gnome-tour";
-  version = "0.0.1";
+  version = "3.37.1";
 
   # We don't use the uploaded tar.xz because it comes pre-vendored
   src = fetchFromGitLab {
@@ -26,10 +27,10 @@ rustPlatform.buildRustPackage rec {
     owner = "GNOME";
     repo = "gnome-tour";
     rev = version;
-    sha256 = "0lbkspnlziq3z177071w3jpghmdwflzra1krdwchzmkfmrhy50ch";
+    sha256 = "1ki3b99gz0mg4lxkdp8aqsiqj92izz22fbavbm2in4izi07mjv6n";
   };
 
-  cargoSha256 = "0k1wp9wswr57fv2d9bysxn97fchd4vz29n5r8gfyp0gcm8rclmij";
+  cargoSha256 = "0vlxwyr102b8s1bszsiw7pym591g7l8xwrqgidvyq6fpqq5j2xqm";
 
   mesonFlags = [
     "-Ddistro_name=NixOS"
@@ -50,6 +51,7 @@ rustPlatform.buildRustPackage rec {
 
   buildInputs = [
     gdk-pixbuf
+    librsvg
     glib
     gtk3
   ];

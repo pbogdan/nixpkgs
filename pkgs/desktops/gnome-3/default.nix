@@ -182,7 +182,9 @@ lib.makeScope pkgs.newScope (self: with self; {
 
   gnome-logs = callPackage ./apps/gnome-logs { };
 
-  gnome-maps = callPackage ./apps/gnome-maps { };
+  gnome-maps = callPackage ./apps/gnome-maps {
+    libhandy = pkgs.libhandy-1;
+  };
 
   gnome-music = callPackage ./apps/gnome-music { };
 

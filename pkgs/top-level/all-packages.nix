@@ -5162,6 +5162,8 @@ in
 
   libhandy = callPackage ../development/libraries/libhandy { };
 
+  libhandy-1 = callPackage ../development/libraries/libhandy/1.x.nix { };
+
   libgumath = callPackage ../development/libraries/libgumath { };
 
   libinsane = callPackage ../development/libraries/libinsane { };

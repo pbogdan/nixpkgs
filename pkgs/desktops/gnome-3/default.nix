@@ -83,7 +83,9 @@ lib.makeScope pkgs.newScope (self: with self; {
 
   gnome-shell-extensions = callPackage ./core/gnome-shell-extensions { };
 
-  gnome-screenshot = callPackage ./core/gnome-screenshot { };
+  gnome-screenshot = callPackage ./core/gnome-screenshot {
+    libhandy = pkgs.libhandy-1;
+  };
 
   gnome-settings-daemon = callPackage ./core/gnome-settings-daemon { };
 

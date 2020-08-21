@@ -37,7 +37,9 @@ lib.makeScope pkgs.newScope (self: with self; {
 
   empathy = callPackage ./core/empathy { };
 
-  epiphany = callPackage ./core/epiphany { };
+  epiphany = callPackage ./core/epiphany {
+    libhandy = pkgs.libhandy-1;
+  };
 
   evince = callPackage ./core/evince { }; # ToDo: dbus would prevent compilation, enable tests
 

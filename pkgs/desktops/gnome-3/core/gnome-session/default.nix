@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     })
   ];
 
-  mesonFlags = [ "-Dsystemd=true" ];
+  mesonFlags = [ "-Dsystemd=true" "-Dsystemd_session=enable" ];
 
   nativeBuildInputs = [
     meson ninja pkgconfig gettext makeWrapper

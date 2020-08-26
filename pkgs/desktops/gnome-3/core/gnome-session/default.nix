@@ -1,4 +1,4 @@
-{ fetchurl, stdenv, substituteAll, meson, ninja, pkgconfig, gnome3, glib, gtk3, gsettings-desktop-schemas
+{ fetchurl, fetchpatch, stdenv, substituteAll, meson, ninja, pkgconfig, gnome3, glib, gtk3, gsettings-desktop-schemas
 , gnome-desktop, dbus, json-glib, libICE, xmlto, docbook_xsl, docbook_xml_dtd_412, python3
 , libxslt, gettext, makeWrapper, systemd, xorg, epoxy, gnugrep, bash }:
 
@@ -20,6 +20,11 @@ stdenv.mkDerivation rec {
       dbusLaunch = "${dbus.lib}/bin/dbus-launch";
       grep = "${gnugrep}/bin/grep";
       bash = "${bash}/bin/bash";
+    })
+
+    (fetchpatch {
+      url = "https://salsa.debian.org/gnome-team/gnome-session/-/raw/debian/master/debian/patches/debian/Make-sure-to-pass-systemd-when-we-re-managing-the-user-se.patch";
+      sha256 = "0wixn8inhpnshz882a6my6hwpng250i41af9mvk3c2jbxsi4cx74";
     })
   ];
 

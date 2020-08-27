@@ -120,6 +120,7 @@ stdenv.mkDerivation rec {
     "-Dgdm-xsession=true"
     "-Dinitial-vt=${initialVT}"
     "-Dsystemdsystemunitdir=${placeholder "out"}/etc/systemd/system"
+    "-Dsystemduserunitdir=${placeholder "out"}/lib/systemd/user"
     "-Dudev-dir=${placeholder "out"}/lib/udev"
     "-Dselinux=disabled"
     "-Dlibaudit=disabled"

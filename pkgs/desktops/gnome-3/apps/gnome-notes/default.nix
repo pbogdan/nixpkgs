@@ -23,7 +23,7 @@
 }:
 
 let
-  version = "3.36.3";
+  version = "3.37.90";
 in
 stdenv.mkDerivation {
   pname = "gnome-notes";
@@ -31,7 +31,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "mirror://gnome/sources/bijiben/${stdenv.lib.versions.majorMinor version}/bijiben-${version}.tar.xz";
-    sha256 = "1midnphyg038s94ahhzv0pvbzzzn62ccky28c9nazxqvw4hvdsbh";
+    sha256 = "0zy3gp24w0cd5nxwpz9s27cvpqsi9jn2y8dn3d771fin45hmhnr6";
   };
 
   doCheck = true;

@@ -193,7 +193,9 @@ lib.makeScope pkgs.newScope (self: with self; {
     libhandy = pkgs.libhandy-1;
   };
 
-  gnome-music = callPackage ./apps/gnome-music { };
+  gnome-music = callPackage ./apps/gnome-music {
+    tracker = pkgs.tracker-3;
+  };
 
   gnome-nettool = callPackage ./apps/gnome-nettool { };
 

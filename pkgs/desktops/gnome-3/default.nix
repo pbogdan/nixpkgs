@@ -113,7 +113,10 @@ lib.makeScope pkgs.newScope (self: with self; {
   # https://github.com/elementary/gala/issues/763
   mutter334 = callPackage ./core/mutter/3.34 { };
 
-  nautilus = callPackage ./core/nautilus { };
+  nautilus = callPackage ./core/nautilus {
+    tracker = pkgs.tracker-3;
+    tracker-miners = pkgs.tracker-miners-3;
+  };
 
   networkmanager-openvpn = pkgs.networkmanager-openvpn.override {
     withGnome = true;

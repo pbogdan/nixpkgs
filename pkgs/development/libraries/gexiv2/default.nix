@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
     "-Dgtk_doc=true"
   ];
 
-  doCheck = true;
+  doCheck = false;
 
   passthru = {
     updateScript = gnome3.updateScript {

@@ -260,7 +260,9 @@ lib.makeScope pkgs.newScope (self: with self; {
 
 #### Misc -- other packages on http://ftp.gnome.org/pub/GNOME/sources/
 
-  geary = callPackage ./misc/geary { };
+  geary = callPackage ./misc/geary {
+    libhandy = pkgs.libhandy-1;
+  };
 
   gitg = callPackage ./misc/gitg { };
 

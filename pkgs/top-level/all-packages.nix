@@ -3347,6 +3347,8 @@ in
   trac = pythonPackages.callPackage ../tools/misc/trac { };
 
   tracker = callPackage ../development/libraries/tracker { };
+  
+  tracker-3 = callPackage ../development/libraries/tracker/3.x.nix { };
 
   tracker-miners = callPackage ../development/libraries/tracker-miners { };
 

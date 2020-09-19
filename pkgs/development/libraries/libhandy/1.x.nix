@@ -3,12 +3,12 @@
 , libhandy
 }:
 libhandy.overrideAttrs (old: rec {
-  version = "0.90.0";
+  version = "1.0.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/libhandy/${stdenv.lib.versions.majorMinor version}/${old.pname}-${version}.tar.xz";
-    sha256 = "11arvwwn0np144fihcvb87ga92y32i69vj0fla72k0x47ad8dc3a";
-  };
+    sha256 = "16b6s8c8akvjlgp5gpcz4jpmmwzyd30c1snn0n974zbvyj18afd9";
+ };
 
   patches = [ ];
 

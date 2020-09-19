@@ -45,11 +45,11 @@ in
 
 stdenv.mkDerivation rec {
   pname = "glib";
-  version = "2.66.0";
+  version = "2.64.5";
 
   src = fetchurl {
     url = "mirror://gnome/sources/glib/${stdenv.lib.versions.majorMinor version}/${pname}-${version}.tar.xz";
-    sha256 = "0v0m268qichkh0sirj8gd4awwg6258yr8k6s6p0lhmh68gqnp9n5";
+    sha256 = "04fczq693wivkqd2qxvvi3sncqgznsvzfiiwsll1rbayf795pgcw";
   };
 
   patches = optionals stdenv.isDarwin [
@@ -85,7 +85,7 @@ stdenv.mkDerivation rec {
     ./split-dev-programs.patch
   ] ++ optional doCheck ./skip-timer-test.patch;
 
-  outputs = [ "bin" "out" "dev" ];
+  outputs = [ "bin" "out" "dev" "devdoc" ];
 
   setupHook = ./setup-hook.sh;
 
@@ -111,7 +111,6 @@ stdenv.mkDerivation rec {
     "-Dgtk_doc=${if stdenv.hostPlatform == stdenv.buildPlatform then "true" else "false"}"
     "-Dnls=enabled"
     "-Ddevbindir=${placeholder ''dev''}/bin"
-    "-Dgtk_doc=false"
   ];
 
   NIX_CFLAGS_COMPILE = toString [

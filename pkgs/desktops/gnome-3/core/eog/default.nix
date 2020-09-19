@@ -8,6 +8,7 @@
 , libxml2
 , libjpeg
 , libpeas
+, libportal
 , gnome3
 , gtk3
 , glib
@@ -48,6 +49,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     libjpeg
+    libportal
     gtk3
     gdk-pixbuf
     glib

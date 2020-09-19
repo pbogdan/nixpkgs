@@ -321,6 +321,7 @@
   ./services/desktops/gnome3/rygel.nix
   ./services/desktops/gnome3/sushi.nix
   ./services/desktops/gnome3/tracker.nix
+  ./services/desktops/gnome3/tracker-3.nix
   ./services/desktops/gnome3/tracker-miners.nix
   ./services/desktops/neard.nix
   ./services/desktops/profile-sync-daemon.nix

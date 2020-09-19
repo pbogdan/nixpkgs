@@ -26,6 +26,11 @@ stdenv.mkDerivation rec {
     python3Packages.pygobject3 python3Packages.dbus-python # for plug-ins
   ];
 
+  mesonFlags = [
+    # TODO: https://github.com/NixOS/nixpkgs/issues/36468
+    "-Dc_args=-I${glib.dev}/include/gio-unix-2.0"
+  ];
+
   postPatch = ''
     chmod +x meson_compile_python.py meson_post_install.py # patchShebangs requires executable file
     patchShebangs .

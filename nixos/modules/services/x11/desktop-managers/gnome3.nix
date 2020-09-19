@@ -216,7 +216,9 @@ in
       services.gnome3.gnome-online-accounts.enable = mkDefault true;
       services.gnome3.gnome-online-miners.enable = true;
       services.gnome3.tracker-miners.enable = mkDefault true;
+      services.gnome3.tracker-miners-3.enable = mkDefault true;
       services.gnome3.tracker.enable = mkDefault true;
+      services.gnome3.tracker-3.enable = mkDefault true;
       services.hardware.bolt.enable = mkDefault true;
       services.packagekit.enable = mkDefault true;
       services.udisks2.enable = true;

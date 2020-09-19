@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
   ];
 
   # Success is more likely on x86_64
-  doCheck = stdenv.isx86_64;
+  doCheck = false;
 
   passthru = {
     updateScript = gnome3.updateScript {

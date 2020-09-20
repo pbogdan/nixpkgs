@@ -194,6 +194,7 @@ lib.makeScope pkgs.newScope (self: with self; {
   };
 
   gnome-music = callPackage ./apps/gnome-music {
+    grilo-plugins = pkgs.grilo-plugins-tracker-3;
     tracker = pkgs.tracker-3;
   };
 

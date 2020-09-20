@@ -11,6 +11,7 @@
 
 , accountsservice
 , coreutils
+, dbus_libs
 , glib
 , gnome3
 , gobject-introspection
@@ -51,6 +52,7 @@ stdenv.mkDerivation rec {
     (substituteAll {
       src = ./fix-paths.patch;
       inherit coreutils plymouth xwayland;
+      dbusLibs = dbus_libs;
     })
 
     # The following patches implement certain environment variables in GDM which are set by

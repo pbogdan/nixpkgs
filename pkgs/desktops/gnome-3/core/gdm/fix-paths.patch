@@ -64,3 +64,27 @@ index fbbfb529..0370557f 100644
  KeyringMode=shared
  
  [Install]
+diff --git a/daemon/gdm-session.c b/daemon/gdm-session.c
+index ca7d98f1..05626079 100644
+--- a/daemon/gdm-session.c
++++ b/daemon/gdm-session.c
+@@ -2916,16 +2916,16 @@ gdm_session_start_session (GdmSession *self,
+                  */
+                 if (run_launcher) {
+                         if (is_x11) {
+-                                program = g_strdup_printf (LIBEXECDIR "/gdm-x-session %s\"dbus-run-session -- %s\"",
++                                program = g_strdup_printf (LIBEXECDIR "/gdm-x-session %s\"@dbusLibs@/bin/dbus-run-session --dbus-daemon=@dbusLibs@/bin/dbus-daemon -- %s\"",
+                                                            register_session ? "--register-session " : "",
+                                                            self->selected_program);
+                         } else {
+-                                program = g_strdup_printf (LIBEXECDIR "/gdm-wayland-session %s\"dbus-run-session -- %s\"",
++                                program = g_strdup_printf (LIBEXECDIR "/gdm-wayland-session %s\"@dbusLibs@/bin/dbus-run-session --dbus-daemon=@dbusLibs@/bin/dbus-daemon -- %s\"",
+                                                            register_session ? "--register-session " : "",
+                                                            self->selected_program);
+                         }
+                 } else {
+-                        program = g_strdup_printf ("dbus-run-session -- %s",
++                        program = g_strdup_printf ("@dbusLibs@/bin/dbus-run-session --dbus-daemon=@dbusLibs@/bin/dbus-daemon -- %s",
+                                                    self->selected_program);
+                 }
+         }

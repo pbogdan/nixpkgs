@@ -1,7 +1,6 @@
 { stdenv
 , dconf
 , fetchurl
-, fetchpatch
 , itstool
 , libtool
 , libxml2
@@ -48,14 +47,6 @@ stdenv.mkDerivation rec {
   };
 
   patches = [
-    (fetchpatch {
-      url = "https://gitlab.gnome.org/GNOME/gdm/-/commit/febeb9a9295fcd47a63c8ccdb41b88387acf8aac.diff";
-      sha256 = "0fc13li3hv7dnhmb8mn20svicbm2z3q1vnbjxnjzw7v80ga2qljg";
-      revert = true;
-      excludes = [
-        "NEWS"
-      ];
-    })
     # Change hardcoded paths to nix store paths.
     (substituteAll {
       src = ./fix-paths.patch;

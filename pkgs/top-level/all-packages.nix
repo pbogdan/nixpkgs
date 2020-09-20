@@ -12621,6 +12621,10 @@ in
 
   grilo-plugins = callPackage ../development/libraries/grilo-plugins { };
 
+  grilo-plugins-tracker-3 = callPackage ../development/libraries/grilo-plugins {
+    tracker = tracker-3;
+  };
+
   grpc = callPackage ../development/libraries/grpc { };
 
   gsettings-qt = libsForQt5.callPackage ../development/libraries/gsettings-qt { };

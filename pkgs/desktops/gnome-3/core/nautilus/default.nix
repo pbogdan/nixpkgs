@@ -88,6 +88,11 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./extension_dir.patch
+
+    (substituteAll {
+      src = ./fix-paths.patch;
+      tracker3 = tracker;
+    })
   ];
 
   passthru = {
